@@ -15,7 +15,10 @@ import Login from './components/Login';
 import About from './components/About';
 import CreateSnippet from './components/CreateSnippet';
 import ShowSnippet from './components/ShowSnippet'
-import showSnippetDetails from './components/ShowSnippetDetails';
+import ShowSnippetDetails from './components/ShowSnippetDetails';
+import NotFoundPage from './components/NotFoundPage';
+import Edit from './components/NotFoundPage'
+import UpdateSnippetInfo from './components/UpdateSnippetInfo';
 
 // Private route component
 const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -73,9 +76,12 @@ function App() {
               <Route path='/about' component={ About } />
               <Route exact path='/' component={ Welcome } />
               <PrivateRoute path='/profile' component={ Profile } user={currentUser} handleLogout={handleLogout} />
-              <Route path='/CreateSnippet' component={ CreateSnippet } />
+              <PrivateRoute path='/CreateSnippet' component={ CreateSnippet } user={currentUser} handleLogout={handleLogout} />
+              <PrivateRoute path='/UpdateSnippet/:id' component={ UpdateSnippetInfo } user={currentUser} handleLogout={handleLogout} />
               <Route path='/ShowSnippet' component={ ShowSnippet } />
-              <Route path='/ShowSnippetDetails' component={ showSnippetDetails } />
+              <Route path='/ShowSnippetDetails/:id' component={ ShowSnippetDetails } />
+              <PrivateRoute path="/profile/edit/:id" component={Edit} user={currentUser} setUser={(userData) => nowCurrentUser(userData)} handleLogout={handleLogout}/>
+			      	<Route path="*" component={NotFoundPage}/>
 
           </Switch>
       </div>

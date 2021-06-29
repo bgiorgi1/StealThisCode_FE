@@ -18,14 +18,16 @@ class ShowSnippet extends Component {
     axios
       .get('http://localhost:8000/api/snippets', {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
       .then(res => {
+          console.log(res.data)
         this.setState({
-            snippet: res.data
+            snippets: res.data.snippet
         })
       })
       .catch(err =>{
         console.log('Error from ShowSnippet');
       })
   };
+ 
 
 
   render() {

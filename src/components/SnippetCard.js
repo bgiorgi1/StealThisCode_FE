@@ -10,12 +10,14 @@ const SnippetCard = (props) => {
             <img src="https://commapress.co.uk/books/the-book-of-cairo/cairo-provisional-v3/image%2Fspan3" alt="" />
             <div className="desc">
                 <h2>
-                    <Link to={`/show-snippet/${snippet._id}`}>
+                    <Link to={`/ShowSnippetDetails/${snippet._id}`}>
                         { snippet.title }
                     </Link>
                 </h2>
-                <h3>{snippet.author}</h3>
-                <p>{snippet.description}</p>
+                <h3>{snippet.body}</h3>
+                <p>{snippet.language}</p>
+                <p>{snippet.language}</p>
+                <p>{snippet.language}</p>
             </div>
         </div>
     )

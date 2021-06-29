@@ -13,14 +13,15 @@ class showSnippetDetails extends Component {
     };
   }
 
+
   componentDidMount() {
-    // console.log("Print id: " + this.props.match.params.id);
+    console.log("Print id: " + this.props.match.params.id);
     axios
-      .get('http://localhost:8000/api/snippets/'+this.props.match.params.id)
+      .get('http://localhost:8000/api/snippets/'+this.props.match.params.id, {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
       .then(res => {
-        // console.log("Print-showBookDetails-API-response: " + res.data);
+        console.log("Print-showBookDetails-API-response: ", res.data);
         this.setState({
-          snippet: res.data
+          snippet: res.data.snippet
         })
       })
       .catch(err => {
@@ -30,9 +31,9 @@ class showSnippetDetails extends Component {
 
   onDeleteClick (id) {
     axios
-      .delete('http://localhost:8000/api/snippets/'+id)
+      .delete('http://localhost:8000/api/snippets/'+id, {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
       .then(res => {
-        this.props.history.push("/");
+        this.props.history.push("/ShowSnippet");
       })
       .catch(err => {
         console.log("Error form showSnippetDetails_deleteClick");
@@ -57,32 +58,27 @@ class showSnippetDetails extends Component {
           <tr>
             <th scope="row">1</th>
             <td>Title</td>
-            <td>{ snippet.title }</td>
+            <td>{ this.state.snippet.title }</td>
           </tr>
           <tr>
             <th scope="row">2</th>
-            <td>Author</td>
-            <td>{ snippet.author }</td>
+            <td>Code</td>
+            <td>{ this.state.snippet.body }</td>
           </tr>
           <tr>
             <th scope="row">3</th>
-            <td>ISBN</td>
-            <td>{ snippet.isbn }</td>
+            <td>Language</td>
+            <td>{ this.state.snippet.language }</td>
           </tr>
           <tr>
             <th scope="row">4</th>
-            <td>Publisher</td>
-            <td>{ snippet.publisher }</td>
-          </tr>
-          <tr>
-            <th scope="row">5</th>
-            <td>Published Date</td>
-            <td>{ snippet.published_date }</td>
+            <td>Dependencies</td>
+            <td>{ this.state.snippet.dependencies }</td>
           </tr>
           <tr>
             <th scope="row">6</th>
-            <td>Description</td>
-            <td>{ snippet.description }</td>
+            <td>Image</td>
+            <td>{ this.state.snippet.image }</td>
           </tr>
         </tbody>
       </table>
@@ -94,7 +90,7 @@ class showSnippetDetails extends Component {
           <div className="row">
             <div className="col-md-10 m-auto">
               <br /> <br />
-              <Link to="/" className="btn btn-outline-warning float-left">
+              <Link to="/ShowSnippet" className="btn btn-outline-warning float-left">
                   Show Snippet List
               </Link>
             </div>
@@ -117,7 +113,7 @@ class showSnippetDetails extends Component {
             </div>
 
             <div className="col-md-6">
-              <Link to={`/edit-snippet/${snippet._id}`} className="btn btn-outline-info btn-lg btn-block">
+              <Link to={`/UpdateSnippet/${snippet._id}`} className="btn btn-outline-info btn-lg btn-block">
                     Edit Snippet
               </Link>
               <br />

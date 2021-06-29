@@ -10,11 +10,10 @@ class UpdateSnippetInfo extends Component {
     super(props);
     this.state = {
       title: '',
-      isbn: '',
-      author: '',
-      description: '',
-      published_date: '',
-      publisher: ''
+      body: '',
+      language: '',
+      dependencies: '',
+      image: ''
     };
   }
 
@@ -46,17 +45,16 @@ class UpdateSnippetInfo extends Component {
 
     const data = {
       title: this.state.title,
-      isbn: this.state.isbn,
-      author: this.state.author,
-      description: this.state.description,
-      published_date: this.state.published_date,
-      publisher: this.state.publisher
+      body: this.state.body,
+      language: this.state.language,
+      dependencies: this.state.dependencies,
+      image: this.state.image
     };
 
     axios
-      .put('http://localhost:8082/api/snippets/'+this.props.match.params.id, data)
+      .put('http://localhost:8082/api/snippets/'+this.props.match.params.id, data, {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
       .then(res => {
-        this.props.history.push('/show-snippet/'+this.props.match.params.id);
+        this.props.history.push('/ShowSnippet/'+this.props.match.params.id);
       })
       .catch(err => {
         console.log("Error in UpdateSnippetInfo!");
@@ -99,7 +97,7 @@ class UpdateSnippetInfo extends Component {
             <br />
 
             <div className='form-group'>
-            <label htmlFor="isbn">Code</label>
+            <label htmlFor="body">Code</label>
               <input
                 type='text'
                 placeholder='Code'
@@ -111,48 +109,37 @@ class UpdateSnippetInfo extends Component {
             </div>
 
             <div className='form-group'>
-            <label htmlFor="author">Author</label>
+            <label htmlFor="language">Languages Used</label>
               <input
                 type='text'
-                placeholder='Author'
-                name='author'
+                placeholder='language'
+                name='language'
                 className='form-control'
-                value={this.state.author}
+                value={this.state.language}
                 onChange={this.onChange}
               />
             </div>
 
             <div className='form-group'>
-            <label htmlFor="description">Description</label>
+            <label htmlFor="dependencies">dependencies</label>
               <input
                 type='text'
-                placeholder='Describe this book'
-                name='description'
+                placeholder='dependencies'
+                name='dependencies'
                 className='form-control'
-                value={this.state.description}
+                value={this.state.dependencies}
                 onChange={this.onChange}
               />
             </div>
 
             <div className='form-group'>
-            <label htmlFor="published_date">Published Date</label>
-              <input
-                type='date'
-                placeholder='published_date'
-                name='published_date'
-                className='form-control'
-                value={this.state.published_date}
-                onChange={this.onChange}
-              />
-            </div>
-            <div className='form-group'>
-            <label htmlFor="publisher">Publisher</label>
+            <label htmlFor="image">image</label>
               <input
                 type='text'
-                placeholder='Publisher of this Book'
-                name='publisher'
+                placeholder='image of this code'
+                name='image'
                 className='form-control'
-                value={this.state.publisher}
+                value={this.state.image}
                 onChange={this.onChange}
               />
             </div>
