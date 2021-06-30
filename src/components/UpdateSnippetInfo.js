@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
@@ -18,11 +18,13 @@ class UpdateSnippetInfo extends Component {
   }
 
   componentDidMount() {
-    // console.log("Print id: " + this.props.match.params.id);
+    //this is displaying the information
+    console.log("Print id: " , this.props.match.params.id);
     axios
-      .get('http://localhost:8082/api/snippets/'+this.props.match.params.id , {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
+      .get('http://localhost:8000/api/snippets/'+this.props.match.params.id , {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
       .then(res => {
         // this.setState({...this.state, book: res.data})
+        console.log("Print-updateSnippet-API-response: ", res.data);
         this.setState({
           title: res.data.title,
           body: res.data.body,
@@ -50,16 +52,20 @@ class UpdateSnippetInfo extends Component {
       dependencies: this.state.dependencies,
       image: this.state.image
     };
-
+console.log(data)
+    //this is updating the information
     axios
-      .put('http://localhost:8082/api/snippets/'+this.props.match.params.id, data, {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
+      .put('http://localhost:8000/api/snippets/'+this.props.match.params.id, data, {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
       .then(res => {
+        console.log("Print-updateSnippet-API-response: ", res.data);
         this.props.history.push('/ShowSnippet/'+this.props.match.params.id);
       })
       .catch(err => {
         console.log("Error in UpdateSnippetInfo!");
       })
+      // return<Redirect to='/ShowSnippetDetails'/>
   };
+
 
 
   render() {
@@ -69,7 +75,7 @@ class UpdateSnippetInfo extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <br />
-              <Link to="/" className="btn btn-outline-warning float-left">
+              <Link to="/ShowSnippet" className="btn btn-outline-warning float-left">
                   Show Snippet List
               </Link>
             </div>

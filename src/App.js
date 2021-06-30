@@ -52,6 +52,7 @@ function App() {
 
   const nowCurrentUser = userData => {
       console.log('--- inside nowCurrentUser ---');
+      console.log( userData)
       setCurrentUser(userData);
       setIsAuthenticated(true); 
   }
@@ -79,7 +80,7 @@ function App() {
               <PrivateRoute path='/CreateSnippet' component={ CreateSnippet } user={currentUser} handleLogout={handleLogout} />
               <PrivateRoute path='/UpdateSnippet/:id' component={ UpdateSnippetInfo } user={currentUser} handleLogout={handleLogout} />
               <Route path='/ShowSnippet' component={ ShowSnippet } />
-              <Route path='/ShowSnippetDetails/:id' component={ ShowSnippetDetails } />
+              <Route path='/ShowSnippetDetails/:id' render={(renderProps)=> <ShowSnippetDetails {...renderProps} user={currentUser}/> } />
               <PrivateRoute path="/profile/edit/:id" component={Edit} user={currentUser} setUser={(userData) => nowCurrentUser(userData)} handleLogout={handleLogout}/>
 			      	<Route path="*" component={NotFoundPage}/>
 

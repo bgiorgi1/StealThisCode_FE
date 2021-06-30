@@ -42,6 +42,7 @@ class showSnippetDetails extends Component {
 
 
   render() {
+      console.log(this.props.user)
 
     const snippet = this.state.snippet;
     let SnippetItem = <div>
@@ -107,7 +108,9 @@ class showSnippetDetails extends Component {
             { SnippetItem }
           </div>
 
-          <div className="row">
+             {this.props.user && this.props.user.id===snippet.userID ? 
+             
+                <div className="row">
             <div className="col-md-6">
               <button type="button" className="btn btn-outline-danger btn-lg btn-block" onClick={this.onDeleteClick.bind(this,snippet._id)}>Delete Snippet</button><br />
             </div>
@@ -120,6 +123,10 @@ class showSnippetDetails extends Component {
             </div>
 
           </div>
+             
+            : null}
+
+      
             {/* <br />
             <button type="button" class="btn btn-outline-info btn-lg btn-block">Edit Book</button>
             <button type="button" class="btn btn-outline-danger btn-lg btn-block">Delete Book</button> */}
