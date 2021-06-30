@@ -13,7 +13,38 @@ class CreateSnippet extends Component {
     this.state = {
       title: '',
       body:'',
-      language:'',
+      language: [],
+      languageOptions:[
+        {
+          id: 1,
+          name: 'Javascript',
+        },
+        {
+          id: 2,
+          name: 'HTML',
+        },
+        {
+          id: 3,
+          name: 'CSS',
+        },
+        {
+          id: 4,
+          name: 'React',
+        },
+        {
+          id: 5,
+          name: 'Bootstrap',
+        },
+        {
+          id: 6,
+          name: 'Material-UI',
+        },
+        {
+        id: 7,
+        name: 'Python',
+        }
+      ],
+      selected: [],
       dependencies:'',
       image:'',
     };
@@ -23,13 +54,26 @@ class CreateSnippet extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  onCheckBoxChange(id) {
+    let selected = this.state.selected
+    let find = selected.indexOf(id)
+  
+    if(find > -1) {
+      selected.splice(find, 1)
+    } else {
+      selected.push(id)
+    }
+  
+    this.setState({ selected })
+  }
+
   onSubmit = e => {
     e.preventDefault();
 
     const data = {
       title: this.state.title,
       body: this.state.body,
-      language: this.state.language,
+      language: this.state.selected.map(id => this.state.languageOptions[id].name),
       dependencies: this.state.dependencies,
       image: this.state.image
     };
@@ -94,18 +138,6 @@ console.log(currentUser)
                   />
                 </div>
 
-
-                <div className='form-group'>
-                  <input
-                    type='text'
-                    placeholder='Languages used'
-                    name='language'
-                    className='form-control'
-                    value={this.state.language}
-                    onChange={this.onChange}
-                  />
-                </div>
-
              
                 <div className='form-group'>
                   <input
@@ -117,6 +149,27 @@ console.log(currentUser)
                     onChange={this.onChange}
                   />
                 </div>
+
+
+          <div>
+
+          {
+        this.state.languageOptions.map(item => {
+       return (
+        <label key={ item.id }>
+          <input type="checkbox" 
+           onChange={ () => this.onCheckBoxChange(item.id) }
+          selected={ this.state.selected.includes(item.id) }
+          >  
+          </input>
+          <span>{ item.name }</span>
+        </label>
+         )
+        })
+        }
+
+          </div>
+
 
                 <input
                     type="submit"

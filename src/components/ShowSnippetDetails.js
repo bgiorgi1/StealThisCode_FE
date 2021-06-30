@@ -69,7 +69,7 @@ class showSnippetDetails extends Component {
           <tr>
             <th scope="row">3</th>
             <td>Language</td>
-            <td>{ this.state.snippet.language }</td>
+            <td>{ snippet.language && this.state.snippet.language.map(l =><span>{l}{" "}</span>)}</td>
           </tr>
           <tr>
             <th scope="row">4</th>
