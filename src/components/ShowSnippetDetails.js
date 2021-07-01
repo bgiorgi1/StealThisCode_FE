@@ -100,7 +100,7 @@ class showSnippetDetails extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-10 m-auto">
-              <br /> <br />
+              <br/> <br />
 
               
               <Link to="/ShowSnippet" className="btn btn-outline-warning float-left">
@@ -118,10 +118,21 @@ class showSnippetDetails extends Component {
           </div>
           <div>
             { SnippetItem }
-            <SyntaxHighlighter language="javascript" style={docco}>
-              {this.state.snippet.body ||'code loading'}
-              </SyntaxHighlighter>
           </div>
+          <div>
+        <h1>Code Snippet</h1>
+        <div style={{paddingTop: 20, display: 'flex'}}>
+          <div style={{flex: 1, width: '100%', flexDirection: 'column'}}>
+            <SyntaxHighlighter
+              style={docco}
+              wrapLines={true}
+              wrapLongLines={true}
+            >
+              {this.state.snippet.body ||'code loading'}
+            </SyntaxHighlighter>
+          </div>
+        </div>
+      </div>
 
              {this.props.user && this.props.user.id===snippet.userID ? 
              

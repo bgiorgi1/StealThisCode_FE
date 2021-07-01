@@ -11,7 +11,38 @@ class UpdateSnippetInfo extends Component {
     this.state = {
       title: '',
       body: '',
-      language: '',
+      language: [],
+      languageOptions:[
+        {
+          id: 0,
+          name: 'Javascript',
+        },
+        {
+          id: 1,
+          name: 'HTML',
+        },
+        {
+          id: 2,
+          name: 'CSS',
+        },
+        {
+          id: 3,
+          name: 'React',
+        },
+        {
+          id: 4,
+          name: 'Bootstrap',
+        },
+        {
+          id: 5,
+          name: 'Material-UI',
+        },
+        {
+        id: 6,
+        name: 'Python',
+        }
+      ],
+      selected: [],
       dependencies: '',
       image: ''
     };
@@ -42,13 +73,28 @@ class UpdateSnippetInfo extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  onCheckBoxChange(id) {
+    let selected = this.state.selected
+    let find = selected.indexOf(id)
+  
+    if(find > -1) {
+      selected.splice(find, 1)
+    } else {
+      selected.push(id)
+    }
+  console.log(find, selected)
+    this.setState({ selected })
+
+  }
+
+
   onSubmit = e => {
     e.preventDefault();
 
     const data = {
       title: this.state.title,
       body: this.state.body,
-      language: this.state.language,
+      language: this.state.selected.map(id => this.state.languageOptions[id].name),
       dependencies: this.state.dependencies,
       image: this.state.image
     };
@@ -93,7 +139,7 @@ console.log(data)
               <label htmlFor="title">Title</label>
               <input
                 type='text'
-                placeholder='Title of the Book'
+                placeholder='Title of Code Snippet'
                 name='title'
                 className='form-control'
                 value={this.state.title}
@@ -101,30 +147,6 @@ console.log(data)
               />
             </div>
             <br />
-
-            <div className='form-group'>
-            <label htmlFor="body">Code</label>
-              <input
-                type='text'
-                placeholder='Code'
-                name='body'
-                className='form-control'
-                value={this.state.body}
-                onChange={this.onChange}
-              />
-            </div>
-
-            <div className='form-group'>
-            <label htmlFor="language">Languages Used</label>
-              <input
-                type='text'
-                placeholder='language'
-                name='language'
-                className='form-control'
-                value={this.state.language}
-                onChange={this.onChange}
-              />
-            </div>
 
             <div className='form-group'>
             <label htmlFor="dependencies">dependencies</label>
@@ -139,6 +161,33 @@ console.log(data)
             </div>
 
             <div className='form-group'>
+            <label htmlFor="body">Code</label>
+              <textarea
+                rows="4" cols="50"
+                type='text'
+                placeholder='Enter Code Here'
+                name='body'
+                className='form-control'
+                value={this.state.body}
+                onChange={this.onChange}
+              />
+            </div>
+
+            {/* <div className='form-group'>
+            <label htmlFor="language">Languages Used</label>
+              <input
+                type='text'
+                placeholder='language'
+                name='language'
+                className='form-control'
+                value={this.state.language}
+                onChange={this.onChange}
+              />
+            </div> */}
+
+       
+
+            {/* <div className='form-group'>
             <label htmlFor="image">image</label>
               <input
                 type='text'
@@ -148,7 +197,26 @@ console.log(data)
                 value={this.state.image}
                 onChange={this.onChange}
               />
-            </div>
+            </div> */}
+
+            <div>
+{/* This is mapping through list of languages above */}
+          {
+        this.state.languageOptions.map(item => {
+       return (
+        <label key={ item.id }>
+          <input type="checkbox" 
+           onChange={ () => this.onCheckBoxChange(item.id) }
+          selected={ this.state.selected.includes(item.id) }
+          >  
+          </input>
+          <span>{ item.name }</span>
+        </label>
+         )
+        })
+        }
+          </div>
+
 
             <button type="submit" className="btn btn-outline-info btn-lg btn-block">Update Snippet</button>
             </form>

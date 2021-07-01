@@ -14,9 +14,6 @@ const SnippetCard = (props) => {
                         { snippet.title }
                     </Link>
                 </h2>
-                <h3>{snippet.body}</h3>
-                <p>{snippet.language}</p>
-                <p>{snippet.language}</p>
                 <p>{snippet.language}</p>
             </div>
         </div>

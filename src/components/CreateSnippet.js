@@ -51,7 +51,6 @@ class CreateSnippet extends Component {
       selected: [],
       dependencies:'',
       image:'',
-      // editorLanguage:'Javascript',
     };
   }
 
@@ -114,7 +113,7 @@ console.log('data', data)
           <div className="row">
             <div className="col-md-8 m-auto">
               <br />
-              <Link to="/" className="btn btn-outline-warning float-left">
+              <Link to="/ShowSnippet" className="btn btn-outline-warning float-left">
                   Show Snippet List
               </Link>
             </div>
@@ -124,9 +123,6 @@ console.log('data', data)
                   Create new snippet
               </p>
 
-              <SyntaxHighlighter language="javascript" style={docco}>
-              {'hey'}
-              </SyntaxHighlighter>
 
               <form noValidate onSubmit={this.onSubmit}>
                 <div className='form-group'>
@@ -140,20 +136,6 @@ console.log('data', data)
                   />
                 </div>
                 <br />
-
-
-               
-                <div className='form-group'>
-                  <input
-                    type='text'
-                    placeholder='Enter code here'
-                    name='body'
-                    className='form-control'
-                    value={this.state.body}
-                    onChange={this.onChange}
-                  />
-                </div>
-               
              
                 <div className='form-group'>
                   <input
@@ -162,6 +144,18 @@ console.log('data', data)
                     name='dependencies'
                     className='form-control'
                     value={this.state.dependencies}
+                    onChange={this.onChange}
+                  />
+                </div>
+
+                <div className='form-group'>
+                  <textarea
+                    rows="4" cols="50"
+                    type='text'
+                    placeholder='Enter code here'
+                    name='body'
+                    className='form-control'
+                    value={this.state.body}
                     onChange={this.onChange}
                   />
                 </div>
@@ -185,7 +179,6 @@ console.log('data', data)
         }
           </div>
 
-
           
 
                 <input
@@ -193,6 +186,7 @@ console.log('data', data)
                     className="btn btn-outline-warning btn-block mt-4"
                 />
               </form>
+
 
               
           </div>
