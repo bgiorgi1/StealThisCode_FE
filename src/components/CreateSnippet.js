@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 // import CodeEditor from "./CodeEditor";
 import '../App.css';
 import axios from 'axios';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
@@ -106,6 +108,7 @@ console.log('data', data)
   render() {
     console.log(this.state)
     return (
+      
       <div className="CreateSnippet">
         <div className="container">
           <div className="row">
@@ -121,6 +124,10 @@ console.log('data', data)
                   Create new snippet
               </p>
 
+              <SyntaxHighlighter language="javascript" style={docco}>
+              {'hey'}
+              </SyntaxHighlighter>
+
               <form noValidate onSubmit={this.onSubmit}>
                 <div className='form-group'>
                   <input
@@ -134,6 +141,8 @@ console.log('data', data)
                 </div>
                 <br />
 
+
+               
                 <div className='form-group'>
                   <input
                     type='text'
@@ -144,7 +153,7 @@ console.log('data', data)
                     onChange={this.onChange}
                   />
                 </div>
-
+               
              
                 <div className='form-group'>
                   <input
@@ -190,6 +199,9 @@ console.log('data', data)
           </div>
         </div>
       </div>
+
+
+
     );
   }
 }

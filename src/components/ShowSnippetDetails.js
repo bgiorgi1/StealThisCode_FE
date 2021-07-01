@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 const currentUser = localStorage.getItem('jwtToken');
+
+// const mySnippet = this.state.snippet.body;
 
 class showSnippetDetails extends Component {
   constructor(props) {
@@ -13,13 +18,15 @@ class showSnippetDetails extends Component {
     };
   }
 
+  
 
   componentDidMount() {
     console.log("Print id: " + this.props.match.params.id);
     axios
       .get('http://localhost:8000/api/snippets/'+this.props.match.params.id, {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
       .then(res => {
-        console.log("Print-showBookDetails-API-response: ", res.data);
+        console.log("Print-showBookDetails-API-response: ", res.data,);
+        console.log(this.props)
         this.setState({
           snippet: res.data.snippet
         })
@@ -61,11 +68,13 @@ class showSnippetDetails extends Component {
             <td>Title</td>
             <td>{ this.state.snippet.title }</td>
           </tr>
-          <tr>
+          {/* <tr>
             <th scope="row">2</th>
             <td>Code</td>
-            <td>{ this.state.snippet.body }</td>
-          </tr>
+            <td>
+            { this.state.snippet.body }
+            </td>
+          </tr> */}
           <tr>
             <th scope="row">3</th>
             <td>Language</td>
@@ -76,21 +85,24 @@ class showSnippetDetails extends Component {
             <td>Dependencies</td>
             <td>{ this.state.snippet.dependencies }</td>
           </tr>
-          <tr>
+          {/* <tr>
             <th scope="row">6</th>
             <td>Image</td>
             <td>{ this.state.snippet.image }</td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
     </div>
 
     return (
+        
       <div className="ShowSnippetDetails">
         <div className="container">
           <div className="row">
             <div className="col-md-10 m-auto">
               <br /> <br />
+
+              
               <Link to="/ShowSnippet" className="btn btn-outline-warning float-left">
                   Show Snippet List
               </Link>
@@ -106,6 +118,9 @@ class showSnippetDetails extends Component {
           </div>
           <div>
             { SnippetItem }
+            <SyntaxHighlighter language="javascript" style={docco}>
+              {this.state.snippet.body ||'code loading'}
+              </SyntaxHighlighter>
           </div>
 
              {this.props.user && this.props.user.id===snippet.userID ? 
