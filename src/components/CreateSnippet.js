@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+// import CodeEditor from "./CodeEditor";
 import '../App.css';
 import axios from 'axios';
+
+
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 const currentUser = localStorage.getItem('jwtToken');
-
 
 
 class CreateSnippet extends Component {
@@ -16,43 +18,46 @@ class CreateSnippet extends Component {
       language: [],
       languageOptions:[
         {
-          id: 1,
+          id: 0,
           name: 'Javascript',
         },
         {
-          id: 2,
+          id: 1,
           name: 'HTML',
         },
         {
-          id: 3,
+          id: 2,
           name: 'CSS',
         },
         {
-          id: 4,
+          id: 3,
           name: 'React',
         },
         {
-          id: 5,
+          id: 4,
           name: 'Bootstrap',
         },
         {
-          id: 6,
+          id: 5,
           name: 'Material-UI',
         },
         {
-        id: 7,
+        id: 6,
         name: 'Python',
         }
       ],
       selected: [],
       dependencies:'',
       image:'',
+      // editorLanguage:'Javascript',
     };
   }
 
+  
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
 
   onCheckBoxChange(id) {
     let selected = this.state.selected
@@ -63,8 +68,9 @@ class CreateSnippet extends Component {
     } else {
       selected.push(id)
     }
-  
+  console.log(find, selected)
     this.setState({ selected })
+
   }
 
   onSubmit = e => {
@@ -77,7 +83,7 @@ class CreateSnippet extends Component {
       dependencies: this.state.dependencies,
       image: this.state.image
     };
-console.log(currentUser)
+console.log('data', data)
     axios
       .post('http://localhost:8000/api/snippets', data, {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
       .then(res => {
@@ -98,6 +104,7 @@ console.log(currentUser)
   };
 
   render() {
+    console.log(this.state)
     return (
       <div className="CreateSnippet">
         <div className="container">
@@ -152,7 +159,7 @@ console.log(currentUser)
 
 
           <div>
-
+{/* This is mapping through list of languages above */}
           {
         this.state.languageOptions.map(item => {
        return (
@@ -167,15 +174,18 @@ console.log(currentUser)
          )
         })
         }
-
           </div>
 
+
+          
 
                 <input
                     type="submit"
                     className="btn btn-outline-warning btn-block mt-4"
                 />
               </form>
+
+              
           </div>
           </div>
         </div>

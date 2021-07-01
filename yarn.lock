@@ -9027,6 +9027,11 @@
     "ansi-styles" "^4.0.0"
     "react-is" "^17.0.1"
 
+"prismjs@^1.24.0":
+  "integrity" "sha512-SqV5GRsNqnzCL8k5dfAjCNhUrF3pR0A9lTDSCUZeh/LIshheXJEaP0hwLz2t4XHivd2J/v2HR+gRnigzeKe3cQ=="
+  "resolved" "https://registry.npmjs.org/prismjs/-/prismjs-1.24.0.tgz"
+  "version" "1.24.0"
+
 "process-nextick-args@~2.0.0":
   "integrity" "sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag=="
   "resolved" "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz"
