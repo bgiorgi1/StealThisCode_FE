@@ -139,6 +139,7 @@ console.log(data)
               <label htmlFor="title">Title</label>
               <input
                 type='text'
+                // defaultValue={this.setState.title}
                 placeholder='Title of Code Snippet'
                 name='title'
                 className='form-control'
