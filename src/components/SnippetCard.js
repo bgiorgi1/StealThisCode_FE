@@ -7,7 +7,7 @@ const SnippetCard = (props) => {
 
     return(
         <div className="card-container">
-            <img src="https://commapress.co.uk/books/the-book-of-cairo/cairo-provisional-v3/image%2Fspan3" alt="" />
+            <img src="https://smashicons.com/uploads/media/icon_thumbnail/0004/49/thumb_348710_icon_thumbnail_small.png" alt="" />
             <div className="desc">
                 <h2>
                     <Link to={`/ShowSnippetDetails/${snippet._id}`}>

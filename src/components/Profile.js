@@ -28,14 +28,14 @@ const Profile = (props) => {
 						{email}
 					</p>
 				</div>
-				<div className="edit__link col-6">
+				{/* <div className="edit__link col-6">
 					<Link
 						className="btn"
 						to="profile/edit"
 					>
 						Edit Profile
 					</Link>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	) : (

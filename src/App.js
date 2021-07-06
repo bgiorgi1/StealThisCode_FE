@@ -66,9 +66,9 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App container-fluid">
       <Navbar isAuth={isAuthenticated}  handleLogout={handleLogout} />
-      <div className="container mt-5">
+      <div className="container-fluid">
           <Switch>
               {/* routes will go inside of here */}
               <Route path='/signup' component={ Signup } />

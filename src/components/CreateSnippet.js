@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// import CodeEditor from "./CodeEditor";
 import '../App.css';
 import axios from 'axios';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-
+// import ImageUpload from './ImageUpload';
 
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 const currentUser = localStorage.getItem('jwtToken');
-
 
 class CreateSnippet extends Component {
   constructor() {
@@ -50,7 +46,9 @@ class CreateSnippet extends Component {
       ],
       selected: [],
       dependencies:'',
-      image:'',
+      // image:'',
+      // imageUrl: undefined,
+      // imageAlt: undefined,
     };
   }
 
@@ -82,8 +80,57 @@ class CreateSnippet extends Component {
       body: this.state.body,
       language: this.state.selected.map(id => this.state.languageOptions[id].name),
       dependencies: this.state.dependencies,
-      image: this.state.image
+      // image: this.state.image
     };
+
+    // This is for image upload
+//     const handleImageUpload = () => {
+//       const { files } = document.querySelector('input[type="file"]')
+  
+//       const formData = new FormData();
+//       formData.append('file', files[0]);
+//       formData.append('upload_preset', 'yefmvq5e');
+  
+//       const options = {
+//         method: 'POST',
+//         body: formData,
+//       };
+    
+//       return fetch('https://api.cloudinary.com/v1_1/dfurnzozk/image/upload', options)
+//         .then(res => res.json())
+//         .then(res => {
+//           this.setState({
+//             imageUrl: res.secure_url,
+//             imageAlt: `An image of ${res.original_filename}`
+//           })
+//         })
+//         .catch(err => console.log(err));
+//     }
+  
+//     // ...
+// const openWidget = () => {
+//   // create the widget
+//   const widget = window.Cloudinary.createUploadWidget(
+//     {
+//       cloudName: 'dfurnzozk',
+//       uploadPreset: 'yefmvq5e',
+//     },
+//     (error, result) => {
+//       if (result.event === 'success') {
+//         this.setState({
+//           imageUrl: result.info.secure_url,
+//           imageAlt: `An image of ${result.info.original_filename}`
+//         })
+//       }
+//     },
+//   );
+//   widget.open(); // open up the widget after creation
+// };
+  
+
+// ********************
+
+
 console.log('data', data)
     axios
       .post('http://localhost:8000/api/snippets', data, {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
@@ -94,7 +141,7 @@ console.log('data', data)
           body:'',
           language:'',
           dependencies:'',
-          image:'',
+          // image:'',
         })
         this.props.history.push('/ShowSnippet');
       })
@@ -106,6 +153,7 @@ console.log('data', data)
 
   render() {
     console.log(this.state)
+    // const { imageUrl, imageAlt } = this.state;
     return (
       
       <div className="CreateSnippet">
@@ -179,8 +227,26 @@ console.log('data', data)
         }
           </div>
 
-          
-
+{/* this is for image uploads */}
+          {/* <main  className="App">
+        <section className="left-side">
+          <form>
+            <div className="form-group">
+              <input type="file" name="file" placeholder="upload image"/>
+            </div>
+  
+            <button type="button" className="btn" onClick={this.handleImageUpload}>Submit</button>
+            <button type="button" className="btn widget-btn" onClick={this.openWidget}>Upload Via Widget</button>
+          </form>
+        </section>
+        <section className="right-side">
+          <p>The resulting image will be displayed here</p>
+          {imageUrl && (
+            <img src={imageUrl} alt={imageAlt} className="displayed-image"/>
+          )}
+        </section>
+      </main> */}
+{/* <ImageUpload/> */}
                 <input
                     type="submit"
                     className="btn btn-outline-warning btn-block mt-4"
