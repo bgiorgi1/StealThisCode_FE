@@ -16,7 +16,7 @@ class ShowSnippet extends Component {
 
   componentDidMount() {
     axios
-      .get('http://localhost:8000/api/snippets', {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
+      .get(REACT_APP_SERVER_URL+'/api/snippets', {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
       .then(res => {
           console.log(res.data)
         this.setState({

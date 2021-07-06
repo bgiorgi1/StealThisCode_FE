@@ -23,7 +23,7 @@ class showSnippetDetails extends Component {
   componentDidMount() {
     console.log("Print id: " + this.props.match.params.id);
     axios
-      .get('http://localhost:8000/api/snippets/'+this.props.match.params.id, {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
+      .get(REACT_APP_SERVER_URL+'/api/snippets/'+this.props.match.params.id, {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
       .then(res => {
         console.log("Print-showBookDetails-API-response: ", res.data,);
         console.log(this.props)
@@ -38,7 +38,7 @@ class showSnippetDetails extends Component {
 
   onDeleteClick (id) {
     axios
-      .delete('http://localhost:8000/api/snippets/'+id, {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
+      .delete(REACT_APP_SERVER_URL+'/api/snippets/'+id, {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
       .then(res => {
         this.props.history.push("/ShowSnippet");
       })

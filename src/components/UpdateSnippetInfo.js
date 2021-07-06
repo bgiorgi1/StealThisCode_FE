@@ -52,7 +52,7 @@ class UpdateSnippetInfo extends Component {
     //this is displaying the information
     console.log("Print id: " , this.props.match.params.id);
     axios
-      .get('http://localhost:8000/api/snippets/'+this.props.match.params.id , {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
+      .get(REACT_APP_SERVER_URL+'/api/snippets/'+this.props.match.params.id , {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
       .then(res => {
         // this.setState({...this.state, book: res.data})
         console.log("Print-updateSnippet-API-response: ", res.data);
@@ -101,7 +101,7 @@ class UpdateSnippetInfo extends Component {
 console.log(data)
     //this is updating the information
     axios
-      .put('http://localhost:8000/api/snippets/'+this.props.match.params.id, data, {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
+      .put(REACT_APP_SERVER_URL+'/api/snippets/'+this.props.match.params.id, data, {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
       .then(res => {
         console.log("Print-updateSnippet-API-response: ", res.data);
         this.props.history.push('/ShowSnippet/'+this.props.match.params.id);
