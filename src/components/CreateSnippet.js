@@ -133,7 +133,7 @@ class CreateSnippet extends Component {
 
 console.log('data', data)
     axios
-      .post(REACT_APP_SERVER_URL+'/api/snippets', data, {headers:{Authorization:currentUser, 'Content-Type': 'Application/json'}})
+      .post(REACT_APP_SERVER_URL+'/api/snippets', data, {headers:{'Authorization':currentUser, 'Content-Type': 'Application/json'}})
       .then(res => {
         console.log(res.data)
         this.setState({
